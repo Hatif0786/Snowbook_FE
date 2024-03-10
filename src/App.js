@@ -4,16 +4,19 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
 import NoteState from "./context/Note/NoteState";
+import "./components/css/Home.css"
 
 function App() {
   return (
     <NoteState>
       <Router>
         <Navbar />
-        <Routes>
-          <Route path="/about" element={<About />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
+         <div className="container">
+          <Routes>
+            <Route path="/about" element={<About />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+         </div>
       </Router>
     </NoteState>
   );
