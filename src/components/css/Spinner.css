@@ -1,0 +1,7 @@
+.spinner-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 90vh; /* Make the spinner cover the entire viewport vertically */
+  }
+  

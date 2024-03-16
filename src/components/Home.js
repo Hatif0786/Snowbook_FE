@@ -1,61 +1,93 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import noteContext from '../context/Note/noteContext'
+import { useNavigate } from 'react-router-dom'
 const Home = () => {
+  const context = useContext(noteContext)
+  const {addNote} = context
+  const navigate = useNavigate()
+  const [note, setNote] = useState({title: "", description: "", tag:"General"})
+  const [showAlert, setShowAlert] = useState(false)
+  const handleClick = (e) => {
+    e.preventDefault();
+    addNote(note).then((resp) => {
+      setShowAlert(true)
+      setTimeout(()=>setShowAlert(false), 2000)
+      navigate("/about")
+      setNote({title: "", description: "", tag:"General"})
+      
+    })
+    
+  }
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setNote(prevNote => ({
+      ...prevNote,
+      [name]: value
+    }));
+  };
+  
   
   return (
     <div className='container'>
-      <h1 className='my-4 text-center'><b>Add a Note</b></h1>
+      <h1 className='my-4 text-center' ><b >Add a Note</b></h1>
       <main className='d-flex justify-content-center'>
         <section className="add-card page">
           <form className="form">
-            <label for="name" className="label">
-              <span className="title">Note Title</span>
-              <input
+          <label htmlFor="title" className="label">
+            <span className="title">Note Title</span>
+            <input
+              className="input-field"
+              type="text"
+              id="title"
+              name="title"
+              value={note.title}
+              placeholder="Enter the note title"
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="description" className="label">
+            <span className="title">Note Description</span>
+            <input
+              className="input-field"
+              type="textarea"
+              id="description"
+              name="description"
+              value={note.description}
+              placeholder="Enter the note description"
+              onChange={handleChange}
+            />
+          </label>
+          <div className="split">
+            <label htmlFor="tag" className="label">
+              <span className="title">Tag</span>
+              <select
+                id="tag"
                 className="input-field"
-                type="text"
-                name="input-name"
-                title="Input title"
-                placeholder="Enter the note title"
-              />
+                value={note.tag}
+                onChange={handleChange}
+                name="tag"
+              >
+                <option value="General">General</option>
+                <option value="Personal">Personal</option>
+                <option value="Confidential">Confidential</option>
+              </select>
             </label>
-            <label for="serialCardNumber" className="label">
-              <span className="title">Note Description</span>
-              <input
-                id="serialCardNumber"
-                className="input-field"
-                type="textarea"
-                name="input-name"
-                title="Input title"
-                placeholder="Enter the note description"
-              />
-            </label>
-            <div className="split">
-              <label for="ExDate" className="label">
-                <span className="title">Expiry Date</span>
-                <input
-                  id="ExDate"
-                  className="input-field"
-                  type="text"
-                  name="input-name"
-                  title="Expiry Date"
-                  placeholder="01/23"
-                />
-              </label>
-              <label for="cvv" className="label">
-                <span className="title"> CVV</span>
-                <input
-                  id="cvv"
-                  className="input-field"
-                  type="number"
-                  name="cvv"
-                  title="CVV"
-                  placeholder="CVV"
-                />
-              </label>
-            </div>
-            <input className="checkout-btn" type="button" value="Checkout" />
+          </div>
+            <input className="checkout-btn" type="button" onClick={handleClick} value="Add Note" />
           </form>
         </section>
       </main>
+
+      <br />
+
+      <section className="alert-section">
+        {showAlert && (
+          <div className="alert" style={{ backgroundColor: "#d17842", fontWeight: "bold", color: "black", borderRadius: "30px", width: "620px", border: "2px solid transparent", textAlign: "center" }} role="alert">
+            Note Added!!
+          </div>
+        )}
+      </section>
 
     </div>
   )

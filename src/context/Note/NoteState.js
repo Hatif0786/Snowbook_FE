@@ -1,130 +1,71 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NoteContext from './noteContext';
 import { useState } from 'react';
+import userContext from '../User/userContext';
+
 
 const NoteState = (props) => {
+      const [notes, setNotes] = useState([])
+      const context = useContext(userContext)
+      const {getToken} = context
 
-    const noteS = [
-      {
-        "_id": "65e4b1bef405f3f1c11ac9214",
-        "title": "My First Note 😎",
-        "description": "All is well!",
-        "tag": "Confidential",
-        "author": {
-          "_id": "65e468f581d61d5145c43519",
-          "name": "Hatif",
-          "email": "hatifkhuld14@gmail.com",
-          "mobile": "0123456789",
-          "password": "$2b$10$/GrC1WzOR7DCk1qDMnkOgeOA.e2ByB/zUomHyxtoMQ6ApxEVQNZSS",
-          "createdAt": "2024-03-03T12:11:33.937Z",
-          "updatedAt": "2024-03-03T12:11:33.937Z",
-          "__v": 0
-        },
-        "createdAt": "2024-03-03T17:22:06.685Z",
-        "updatedAt": "2024-03-04T05:52:41.540Z",
-        "__v": 0
-      },
-      {
-        "_id": "65edddf584f7b9f51116e0665",
-        "title": "My To-Do(s) for 11th March",
-        "description": "I have to do a no. of jobs including bathing, travelling, eating etc.",
-        "tag": "General",
-        "author": {
-          "_id": "65e468f581d61d5145c43519",
-          "name": "Hatif",
-          "email": "hatifkhuld14@gmail.com",
-          "mobile": "0123456789",
-          "password": "$2b$10$/GrC1WzOR7DCk1qDMnkOgeOA.e2ByB/zUomHyxtoMQ6ApxEVQNZSS",
-          "createdAt": "2024-03-03T12:11:33.937Z",
-          "updatedAt": "2024-03-03T12:11:33.937Z",
-          "__v": 0
-        },
-        "createdAt": "2024-03-10T16:21:09.382Z",
-        "updatedAt": "2024-03-10T16:21:09.382Z",
-        "__v": 0
-      },
-      {
-        "_id": "65e4b1bef405f3f1c11ac9210",
-        "title": "My First Note 😎",
-        "description": "All is well!",
-        "tag": "Confidential",
-        "author": {
-          "_id": "65e468f581d61d5145c43519",
-          "name": "Hatif",
-          "email": "hatifkhuld14@gmail.com",
-          "mobile": "0123456789",
-          "password": "$2b$10$/GrC1WzOR7DCk1qDMnkOgeOA.e2ByB/zUomHyxtoMQ6ApxEVQNZSS",
-          "createdAt": "2024-03-03T12:11:33.937Z",
-          "updatedAt": "2024-03-03T12:11:33.937Z",
-          "__v": 0
-        },
-        "createdAt": "2024-03-03T17:22:06.685Z",
-        "updatedAt": "2024-03-04T05:52:41.540Z",
-        "__v": 0
-      },
-      {
-        "_id": "65edddf584f7b9f51116e0661",
-        "title": "My To-Do(s) for 11th March",
-        "description": "I have to do a no. of jobs including bathing, travelling, eating etc.",
-        "tag": "General",
-        "author": {
-          "_id": "65e468f581d61d5145c43519",
-          "name": "Hatif",
-          "email": "hatifkhuld14@gmail.com",
-          "mobile": "0123456789",
-          "password": "$2b$10$/GrC1WzOR7DCk1qDMnkOgeOA.e2ByB/zUomHyxtoMQ6ApxEVQNZSS",
-          "createdAt": "2024-03-03T12:11:33.937Z",
-          "updatedAt": "2024-03-03T12:11:33.937Z",
-          "__v": 0
-        },
-        "createdAt": "2024-03-10T16:21:09.382Z",
-        "updatedAt": "2024-03-10T16:21:09.382Z",
-        "__v": 0
-      },
-      {
-        "_id": "65e4b1bef405f3f1c11ac9212",
-        "title": "My First Note 😎",
-        "description": "All is well!",
-        "tag": "Confidential",
-        "author": {
-          "_id": "65e468f581d61d5145c43519",
-          "name": "Hatif",
-          "email": "hatifkhuld14@gmail.com",
-          "mobile": "0123456789",
-          "password": "$2b$10$/GrC1WzOR7DCk1qDMnkOgeOA.e2ByB/zUomHyxtoMQ6ApxEVQNZSS",
-          "createdAt": "2024-03-03T12:11:33.937Z",
-          "updatedAt": "2024-03-03T12:11:33.937Z",
-          "__v": 0
-        },
-        "createdAt": "2024-03-03T17:22:06.685Z",
-        "updatedAt": "2024-03-04T05:52:41.540Z",
-        "__v": 0
-      },
-      {
-        "_id": "65edddf584f7b9f51116e0663",
-        "title": "My To-Do(s) for 11th March",
-        "description": "I have to do a no. of jobs including bathing, travelling, eating etc.",
-        "tag": "General",
-        "author": {
-          "_id": "65e468f581d61d5145c43519",
-          "name": "Hatif",
-          "email": "hatifkhuld14@gmail.com",
-          "mobile": "0123456789",
-          "password": "$2b$10$/GrC1WzOR7DCk1qDMnkOgeOA.e2ByB/zUomHyxtoMQ6ApxEVQNZSS",
-          "createdAt": "2024-03-03T12:11:33.937Z",
-          "updatedAt": "2024-03-03T12:11:33.937Z",
-          "__v": 0
-        },
-        "createdAt": "2024-03-10T16:21:09.382Z",
-        "updatedAt": "2024-03-10T16:21:09.382Z",
-        "__v": 0
+      const addNote = async ({ title, description, tag }) => {
+        try {
+            const resp = await fetch("https://snowbook-be.onrender.com/api/note/add", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getToken()}`
+                },
+                body: JSON.stringify({ title, description, tag }) // Pass the data to be sent as JSON
+            });
+            if (resp.ok) { // Check if response is successful (status code in the range 200-299)
+                const newNote = await resp.json();
+                setNotes([...notes, newNote]);
+            } else {
+                console.error('Error adding note:', resp.status, resp.statusText);
+            }
+        } catch (error) {
+            console.error('Error adding note:', error);
+        }
+    }
+    
+    
+
+      const deleteNote = async (id) => {
+        // Filter out the note with the given ID
+        try {
+          const resp = await fetch(`https://snowbook-be.onrender.com/api/note/delete/${id}`, {
+              method: 'DELETE',
+              headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${getToken()}`
+              } // Pass the data to be sent as JSON
+          });
+          if (resp.ok) { // Check if response is successful (status code in the range 200-299)
+              await resp.json().then(()=> {
+                const updatedNotes = notes.filter(note => note._id !== id);
+                // Set the state with the updated array of notes
+                setNotes(updatedNotes);
+            });
+          } else {
+              console.error('Error adding note:', resp.status, resp.statusText);
+          }
+          } catch (error) {
+              console.error('Error adding note:', error);
+          }
+            
       }
-    ]
+
+      const editNote = (id, n) => {
+
+      }
+    
+
       
-      const [note, setNote] = useState(noteS)
 
     return (
-        <NoteContext.Provider value={{note, setNote}}>
+        <NoteContext.Provider value={{notes, setNotes, addNote, deleteNote, editNote}}>
             {props.children}
         </NoteContext.Provider>
     )
