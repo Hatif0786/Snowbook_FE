@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../components/css/Navbar.css";
 import userContext from "../context/User/userContext";
@@ -7,9 +7,16 @@ const Navbar = () => {
   let location = useLocation();
   const history = useNavigate()
   const {logged, setLogged} = useContext(userContext)
+  const [islogged, setIsLogged] = useState(false)
     
 
-  useEffect(() => {}, [location]);
+  useEffect(() => {
+    const islogged = localStorage.getItem("islogged");
+    if (islogged) {
+      setLogged(true);
+      setIsLogged(true);
+    }
+  }, [setLogged, location]);
 
   const handleRegisterClick = () => {
     history("/signup");
@@ -21,7 +28,9 @@ const Navbar = () => {
 
   const handleLogoutClick = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("islogged")
     setLogged(false)
+    setIsLogged(false);
     history("/login", {replace:true})
   }
 
@@ -42,7 +51,7 @@ const Navbar = () => {
               width="30"
               height="30"
               className="d-inline-block align-text-top"
-              style={{ marginRight: "5px", marginBottom: "10px", paddingBottom:"5px", paddingLeft:"5px" }}
+              style={{ marginRight: "5px", marginBottom: "5px", paddingBottom:"5px", paddingLeft:"5px" }}
             />
             <b style={{ lineHeight: "35px", verticalAlign: "middle" }}>
               Snowbook
@@ -61,7 +70,7 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav" style={{ marginTop: "4px" }}>
-              {logged && (
+              {islogged && logged && (
                 <>
                   <li className="nav-item">
                     <Link
@@ -89,7 +98,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {!logged && location.pathname !== "/signup" && (
+          {!islogged && !logged && location.pathname !== "/signup" && (
             <button
               onClick={handleRegisterClick}
               style={{ marginRight: "7px", backgroundColor: "#d17842" }}
@@ -98,7 +107,7 @@ const Navbar = () => {
               <svg
                 width="30"
                 height="30"
-                viewBox="0 0 72 72"
+                viewBox="0 0 72 75"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -117,7 +126,7 @@ const Navbar = () => {
             </button>
           )}
 
-          {!logged && location.pathname !== "/login" && (
+          {!islogged && !logged && location.pathname !== "/login" && (
             <button
               onClick={handleLoginClick}
               style={{ backgroundColor: "#3ba8d4" }}
@@ -126,7 +135,7 @@ const Navbar = () => {
               <svg
                 width="30"
                 height="30"
-                viewBox="0 0 72 72"
+                viewBox="0 0 72 75"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -146,16 +155,17 @@ const Navbar = () => {
           )}
 
 
-          {logged && (
+          {islogged && logged && (
             <button
               onClick={handleLogoutClick}
               className="btn btn-warning"
+              style={{borderRadius: "25px"}}
             >
               <span>Logout</span>
               <svg
                 width="30"
                 height="30"
-                viewBox="0 0 72 72"
+                viewBox="0 0 72 75"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >

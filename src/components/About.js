@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Note from "../components/Note";
 import Spinner from './Spinner';
+import loader from '../loader.gif'
 import noteContext from '../context/Note/noteContext';
 import { useState } from 'react';
 import userContext from '../context/User/userContext';
@@ -8,7 +9,7 @@ import userContext from '../context/User/userContext';
 const About = () => {
   // Use useContext to access the context
   const { setNotes } = useContext(noteContext);
-  const { getToken, logged, setLogged } = useContext(userContext); // Include setLogged to update the logged state
+  const { getToken, logged} = useContext(userContext); // Include setLogged to update the logged state
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const About = () => {
 
   return (
     <div className='row my-3'>
-      {loading ? <Spinner /> : <Note />}
+      {loading ? <Spinner loader={loader}/> : <Note />}
     </div>
   );
 };

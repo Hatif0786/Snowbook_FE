@@ -17,7 +17,7 @@ const UserState = (props) => {
                 body: JSON.stringify({ name, email, mobile, password }) // Pass the data to be sent as JSON
             });
             if (resp.ok) { // Check if response is successful (status code in the range 200-299)
-                await resp.json();
+                return await resp.json();
             } else {
                 console.error('Error adding User:', resp.status, resp.statusText);
             }
@@ -48,6 +48,8 @@ const UserState = (props) => {
                 body: JSON.stringify({ email,password }) // Pass the data to be sent as JSON
             });
             if (resp.ok) { // Check if response is successful (status code in the range 200-299)
+                return await resp.json();
+            }else if (resp.status === 500) { // Handle 500 Internal Server Error
                 return await resp.json();
             } else {
                 console.error('Error Login User:', resp.status, resp.statusText);

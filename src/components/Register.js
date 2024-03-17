@@ -2,23 +2,43 @@ import React, {useContext, useState} from 'react';
 import "../components/css/Register.css";
 import userContext from '../context/User/userContext';
 import { useNavigate } from 'react-router-dom';
+import loader from "../loader1.gif"
+import Spinner from './Spinner';
 
 const Register = () => {
     const context = useContext(userContext)
     const {addUser} = context
     const navigate = useNavigate()
-
+    const [loading,setLoading] = useState(false)
     const [user, setUser] = useState({name: "", email: "", mobile:"", password: "", confirmpassword: ""})
     const [showAlert, setShowAlert] = useState(false)
     const handleClick = (e) => {
-        e.preventDefault();
-        addUser(user).then(()=> {
-          setShowAlert(true)
-          setTimeout(()=>setShowAlert(false), 2000)
-          setUser({name: "", email: "", mobile:"", password: "", confirmpassword: ""})
-          navigate("/")
-        })
-    }
+      e.preventDefault();
+      setLoading(true);
+      addUser(user)
+          .then((resp) => {
+              if (resp._id  ) { // Check status code
+                  setShowAlert(true);
+                  setTimeout(() => setShowAlert(false), 2000);
+                  setUser({ name: "", email: "", mobile: "", password: "", confirmpassword: "" });
+                  navigate("/login");
+              } else {
+                  setShowAlert(false);
+                  setUser(user);
+                  navigate("/signup");
+              }
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+              setShowAlert(false);
+              setUser({ name: "", email: "", mobile: "", password: "", confirmpassword: "" });
+              navigate("/signup");
+          })
+          .finally(() => {
+              setLoading(false);
+          });
+  };
+  
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -34,7 +54,8 @@ const Register = () => {
       <h1 className='my-4 text-center'><b >Register</b></h1>
       <main className='d-flex justify-content-center'>
         <section className="add-card page">
-          <form className="form">
+          {loading ? <Spinner loader={loader}/>
+          : (<form className="form">
           <label htmlFor="name" className="label">
             <span className="title">Full Name</span>
             <input
@@ -101,12 +122,13 @@ const Register = () => {
           
             <input className="checkout-btn" type="button" onClick={handleClick} value="Register" />
           </form>
+          )}
         </section>
       </main>
 
       <br />
 
-      <section className="alert-section">
+      <section className="alert-section my-4">
         {showAlert && (
           <div className="alert" style={{ backgroundColor: "#d17842", fontWeight: "bold", color: "black", borderRadius: "30px", width: "620px", border: "2px solid transparent", textAlign: "center" }} role="alert">
             user Added!!
