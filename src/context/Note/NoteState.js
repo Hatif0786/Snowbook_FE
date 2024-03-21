@@ -57,8 +57,28 @@ const NoteState = (props) => {
             
       }
 
-      const editNote = (id, n) => {
-
+      const editNote = async (id, n) => {
+        try {
+            const resp = await fetch(`https://snowbook-be.onrender.com/api/note/update/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getToken()}`
+                }, body: JSON.stringify(n) // Pass the data to be sent as JSON
+            });
+            if (resp.ok) { // Check if response is successful (status code in the range 200-299)
+                const updatedNote = await resp.json(); // Parse response JSON
+                const updatedNotes = notes.map(note => (note._id === id ? updatedNote : note));
+                setNotes(updatedNotes);
+                return updatedNote;    
+            } else if(resp.status === 500) {
+                return await resp.json();
+            }else {
+                console.error('Error adding note:', resp.status, resp.statusText);
+            }
+            } catch (error) {
+                console.error('Error adding note:', error);
+            }
       }
     
 

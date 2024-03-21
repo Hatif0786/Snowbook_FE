@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import noteContext from '../context/Note/noteContext';
@@ -7,7 +7,7 @@ import svgImage from '../snowSvg.svg'; // Import your SVG image
 const Noteitem = (props) => {
    const context = useContext(noteContext)
    const {deleteNote} = context;
-   const { note } = props;
+   const { note, updateNoteModal } = props;
 
    const tagStyle = {
     backgroundColor: note.tag === "Confidential" ? "red" : (note.tag === "Personal" ? "#DECD34" : "#1389eb"),
@@ -17,11 +17,13 @@ const Noteitem = (props) => {
     deleteNote(note._id)
    }
 
-   const editNote = () => {
-    editNote(note._id, note)
-   }
+//    const editNote = () => {
+//     // Implement editNote logic here
+//     editNote(note._id, note)
+//    }
 
   return (
+    <>
     <div className='col-md-3 my-4'>
         <div className="card">
         <img src={svgImage} alt='' />
@@ -33,11 +35,12 @@ const Noteitem = (props) => {
                 <FontAwesomeIcon style={{"cursor":"pointer", "fontSize":"25px"}} icon={faTrashCan} onClick={dltNote} />
             </div>
             <div className="trash-icon trash-icon-right">
-                <FontAwesomeIcon style={{"cursor":"pointer", "fontSize":"25px"}} icon={faPenToSquare} onClick={editNote} />
+                <FontAwesomeIcon style={{"cursor":"pointer", "fontSize":"25px"}}  data-bs-toggle="modal" data-bs-target="#exampleModal" icon={faPenToSquare} onClick={() => updateNoteModal(note)} />
             </div>
         </div>
         </div>
     </div>
+    </>
   );
 };
 
