@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../components/css/Navbar.css";
 import userContext from "../context/User/userContext";
@@ -6,6 +6,7 @@ import userContext from "../context/User/userContext";
 const Navbar = () => {
   let location = useLocation();
   const history = useNavigate()
+  const ref = useRef(null);
   const {logged, setLogged} = useContext(userContext)
   const [islogged, setIsLogged] = useState(false)
     
@@ -19,10 +20,12 @@ const Navbar = () => {
   }, [setLogged, location]);
 
   const handleRegisterClick = () => {
+    ref.current.click()
     history("/signup");
   };
 
   const handleLoginClick = () => {
+    ref.current.click()
     history("/login");
   };
 
@@ -31,6 +34,7 @@ const Navbar = () => {
     localStorage.removeItem("islogged")
     setLogged(false)
     setIsLogged(false);
+    ref.current.click()
     history("/login", {replace:true})
   }
 
@@ -65,6 +69,7 @@ const Navbar = () => {
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            ref={ref}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -96,8 +101,7 @@ const Navbar = () => {
                 </>
               )}
             </ul>
-
-
+            
             {!islogged && !logged && location.pathname !== "/signup" && (
             <button
               onClick={handleRegisterClick}

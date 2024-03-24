@@ -88,7 +88,7 @@ const Login = () => {
       <main className='d-flex justify-content-center'>
         <section className="add-card page">
         {loading ? ( // Show Spinner if loading is true
-              <Spinner loader={loader}/>
+              <Spinner loader={loader} style={{marginBottom: "30px;"}}/>
           ) : (
               <form className="form">
                   <label htmlFor="email" className="label">

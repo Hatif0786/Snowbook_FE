@@ -231,12 +231,10 @@
   .row-cols-sm-2 > * {
     flex: 1 0 100%; /* Each column takes up full width */
     max-width: 100%; /* Max width is 100% */
-    margin-bottom: 15px; 
-    margin-left: 50%;/* Add some bottom margin for spacing */
+    margin-left: 20rem;/* Add some bottom margin for spacing */
   }
 
   .plus-icon{
-    width: 65%;
-    height: auto;
+    width: 50%;
   }
 }
