@@ -33,3 +33,9 @@ button {
     position: absolute;
     left: 70rem;
   }
+
+  @media only screen and (max-width: 768px) {
+    .flex-end{
+      position: sticky;
+    }
+  }
