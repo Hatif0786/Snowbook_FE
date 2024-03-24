@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import Note from "../components/Note";
+import Note from "./Note";
 import Spinner from './Spinner';
 import loader from '../loader.gif'
 import noteContext from '../context/Note/noteContext';
 import { useState } from 'react';
 import userContext from '../context/User/userContext';
 
-const About = () => {
+const Notes = () => {
   // Use useContext to access the context
   const { setNotes } = useContext(noteContext);
   const { getToken, logged} = useContext(userContext); // Include setLogged to update the logged state
@@ -55,4 +55,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Notes;

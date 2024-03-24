@@ -12,7 +12,7 @@ const Home = () => {
     addNote(note).then((resp) => {
       setShowAlert(true)
       setTimeout(()=>setShowAlert(false), 2000)
-      navigate("/about")
+      navigate("/notes")
       setNote({title: "", description: "", tag:"General"})
       
     })

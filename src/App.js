@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import About from "./components/About";
+import Notes from "./components/Notes";
 import NoteState from "./context/Note/NoteState";
 import "./components/css/Home.css"
 import Register from "./components/Register";
@@ -17,7 +17,7 @@ function App() {
         <Navbar />
          <div className="container">
           <Routes>
-            <Route path="/about" element={<About />} />
+            <Route path="/notes" element={<Notes />} />
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Register/>}/>
             <Route path="/login" element={<Login/>}/>

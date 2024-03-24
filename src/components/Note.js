@@ -20,7 +20,7 @@ function Note() {
       if(res && res._id){
         setEditNote({_id:"",title:"",description:""})
         ref.current.click()
-        navigate("/about")
+        navigate("/notes")
       }
     })
   }

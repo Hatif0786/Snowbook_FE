@@ -12,9 +12,6 @@ button {
     font-size: 15px;
   }
   
-  button:hover {
-    background: #c4e201;
-  }
   
   button > svg {
     width: 34px;

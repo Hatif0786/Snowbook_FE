@@ -86,19 +86,19 @@ const Navbar = () => {
                   <li className="nav-item">
                     <Link
                       className={`nav-link ${
-                        location.pathname === "/about" ? "active" : ""
+                        location.pathname === "/notes" ? "active" : ""
                       }`}
-                      to="/about"
+                      to="/notes"
                     >
-                      <b style={{ marginLeft: "15px" }}>About</b>
+                      <b style={{ marginLeft: "15px" }}>Notes  </b>
                     </Link>
                   </li>
                 </>
               )}
             </ul>
-          </div>
 
-          {!islogged && !logged && location.pathname !== "/signup" && (
+
+            {!islogged && !logged && location.pathname !== "/signup" && (
             <button
               onClick={handleRegisterClick}
               style={{ marginRight: "7px", backgroundColor: "#d17842" }}
@@ -125,6 +125,8 @@ const Navbar = () => {
               </svg>
             </button>
           )}
+
+          <br/>
 
           {!islogged && !logged && location.pathname !== "/login" && (
             <button
@@ -183,6 +185,7 @@ const Navbar = () => {
               </svg>
             </button>
           )}
+          </div>    
         </div>
       </nav>
     </div>

@@ -38,7 +38,7 @@ const Login = () => {
                     localStorage.setItem("islogged", true); 
                     setLogged(true);
                     setLoading(false);
-                    navigate("/about");
+                    navigate("/notes");
                     setLogin({ email: "", password: "" });
                 }
             });
