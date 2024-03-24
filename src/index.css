@@ -114,5 +114,8 @@ code {
   background: transparent;
 }
 
-
-
+@media only screen and (max-width: 768px) {
+  body{
+    overflow-x: hidden;
+  }
+}
