@@ -222,6 +222,10 @@
 
 
 @media only screen and (max-width: 768px) {
+  body{
+    overflow-x: hidden;
+  }
+
   .row-cols-sm-2 {
     display: flex;
     flex-wrap: wrap;
